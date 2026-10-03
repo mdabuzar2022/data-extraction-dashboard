@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data Extraction Dashboard</title>
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#f5f7fb,#0d1117);--surface:light-dark(#fff,#161b22);--surface2:light-dark(#eef2f7,#21262d);--text:light-dark(#182230,#f0f6fc);--muted:light-dark(#667085,#8b949e);--border:light-dark(#d9e0e8,#30363d);--accent:light-dark(#2563eb,#58a6ff)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}#app{min-height:100vh;background:var(--bg)}header{padding:34px 7vw 24px;border-bottom:1px solid var(--border);background:var(--surface)}h1{margin:0 0 8px;font-size:32px}header p{margin:0;color:var(--muted)}main{max-width:1180px;margin:auto;padding:28px 20px 60px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px}.label{font-size:13px;color:var(--muted);margin-bottom:8px}.value{font-size:28px;font-weight:750}.section{margin-top:28px}.section h2{font-size:20px}.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface)}table{width:100%;border-collapse:collapse}th,td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}th{background:var(--surface2);position:sticky;top:0}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--surface2);color:var(--accent);font-size:12px}.search{width:100%;padding:13px 15px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--text);margin:8px 0 14px}.note{padding:15px;border-left:4px solid var(--accent);background:var(--surface);border-radius:10px;color:var(--muted);line-height:1.55}.footer{margin-top:28px;color:var(--muted);font-size:13px}@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}h1{font-size:26px}}
+</style>
+</head>
+<body><div id="app">
+<header><h1>Data Extraction Dashboard</h1><p>Bonus application for the Disney Cruise & Ingredients Network extraction challenge</p></header>
+<main>
+<div class="grid">
+<div class="card"><div class="label">Disney cruise records</div><div class="value">170</div></div>
+<div class="card"><div class="label">Ingredients suppliers extracted</div><div class="value">291</div></div>
+<div class="card"><div class="label">Ingredients shown by site</div><div class="value">41,000+</div></div>
+<div class="card"><div class="label">Finished products shown by site</div><div class="value">21,000+</div></div>
+</div>
+<section class="section"><h2>Ingredients Network challenge answers</h2><div class="grid">
+<div class="card"><div class="label">Herbs & Spices suppliers</div><div class="value">399</div></div>
+<div class="card"><div class="label">Physical Formats suppliers</div><div class="value">764</div></div>
+<div class="card"><div class="label">Cognitive & Mental Health suppliers</div><div class="value">590</div></div>
+<div class="card"><div class="label">Company records in final CSV</div><div class="value">291</div></div>
+</div></section>
+<section class="section"><h2>Extracted company sample</h2><input id="q" class="search" placeholder="Search company name or business activity...">
+<div class="table-wrap"><table><thead><tr><th>Company</th><th>Primary Business Activity</th><th>Sales Markets</th><th>Contact data</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<section class="section"><h2>About the project</h2><div class="note">This dashboard presents the outputs of a programmatic data-extraction workflow. Company contact fields that were not publicly displayed on the source pages are intentionally not fabricated. The application is a demonstration layer for the optional bonus challenge.</div></section>
+<div class="footer">Relu Consultancy Data Extraction Engineer Challenge • Demo dashboard</div>
+</main></div>
+<script>
+const data=[
+['1-2-Taste','Manufacturer: Ingredients / Additives','Europe; North America','Not publicly displayed'],
+['1Q Health GMBH','Manufacturer: Finished Products','Europe','Not publicly displayed'],
+['A/S Crispy Food International','Manufacturer: Ingredients / Additives','Western Europe','Not publicly displayed'],
+['ACG','Manufacturer: Ingredients / Additives','Asia; North America; Western Europe','Not publicly displayed'],
+['ACT Capsules GmbH','Manufacturer: Finished Products','Europe; North America','Not publicly displayed'],
+['Advanced Biotech Europe GmbH','Manufacturer: Ingredients / Additives','Asia; Europe; North America','Not publicly displayed'],
+['Advantic Sp. z o.o.','Manufacturer: Ingredients / Additives','Europe','Not publicly displayed'],
+['Agromeals SA','Manufacturer: Ingredients / Additives','Europe; North America','Not publicly displayed']
+];
+function render(){const q=document.getElementById('q').value.toLowerCase();document.getElementById('rows').innerHTML=data.filter(r=>r.join(' ').toLowerCase().includes(q)).map(r=>`<tr><td><b>${r[0]}</b></td><td><span class="pill">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}
+document.getElementById('q').addEventListener('input',render);render();
+</script>
+</body></html>
